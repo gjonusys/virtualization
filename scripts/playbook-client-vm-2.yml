@@ -1,0 +1,9 @@
+---
+ - name: Configure the client-vm
+   hosts: all
+   tasks:
+     - name: 0. Check the connection
+       ping:
+
+     - name: 1. Open a website
+       shell: firefox 193.219.91.103:9429 &
