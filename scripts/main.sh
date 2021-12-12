@@ -91,10 +91,12 @@ echo -e "Client VM ID: ${CLIENTID}\n"
 echo "Waiting for VM to RUN 30 sec."
 sleep 30
 
+mkdir /etc/ansible
+
 #Getting virtual machines' information to file
-$(onevm show $CLIENTID --user $CUSER_CLIENT --password $CPASS_CLIENT  --endpoint $CENDPOINT > /etc/ansible/client.txt)
-$(onevm show $DBID --user $CUSER_DB --password $CPASS_DB  --endpoint $CENDPOINT > /etc/ansible/database.txt)
-$(onevm show $WEBSERVERID --user $CUSER_WEB --password $CPASS_WEB  --endpoint $CENDPOINT > /etc/ansible/webserver.txt)
+onevm show $CLIENTID --user $CUSER_CLIENT --password $CPASS_CLIENT  --endpoint $CENDPOINT > /etc/ansible/client.txt
+onevm show $DBID --user $CUSER_DB --password $CPASS_DB  --endpoint $CENDPOINT > /etc/ansible/database.txt
+onevm show $WEBSERVERID --user $CUSER_WEB --password $CPASS_WEB  --endpoint $CENDPOINT > /etc/ansible/webserver.txt
 
 #Saving virtual machines' private IPs to variables
 IPWEB=$(cat /etc/ansible/webserver.txt | grep PRIVATE\_IP| cut -d '=' -f 2 | tr -d '"')
@@ -121,7 +123,9 @@ echo "Done pinging!"
 
 #Adding database IP to vars.php file
 
-echo -e "<?php '$'ip=${IPDB} ?>" > vars.php
+echo '<?php $ip="' > vars.php
+echo $IPDB >> vars.php
+echo '";' >> vars.php
 
 #Gathering newest data from web git
 
