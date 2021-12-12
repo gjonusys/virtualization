@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XUI</title>
+    <title>Phone page</title>
 </head>
 <body>
 <div style="width: 60%; height:500px; background-color: #fbfff0; margin: 0 auto!important; display: grid; grid-template-columns: 1fr 1fr; font-family: Arial, Helvetica, sans-serif;">
@@ -11,7 +11,9 @@
 <div style="display:flex; justify-content: center; align-items:center">Number</div>
 <?php
 
-$conn = pg_connect("host=10.0.1.243 port=5432 dbname=postgres user=postgres password=1234");
+include 'vars.php';
+
+$conn = pg_connect("host=".$ip." port=5432 dbname=postgres user=postgres password=1234");
 if (!$conn) {
   echo "An error occurred.\n";
   exit;
