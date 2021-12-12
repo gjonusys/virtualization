@@ -21,7 +21,7 @@ if (!$result) {
   exit;
 }
 
-echo $result;
+echo var_dump($result);
 echo 'LOX';
 ?> 
 </p>
