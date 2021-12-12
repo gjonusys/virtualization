@@ -7,12 +7,12 @@
 </head>
 <body>
 
-<p>
-  <?php 
-     $db_connection = pg_connect("host=10.0.1.243 dbname='postgres' user='postgres' password='1234'");
-     $result = pg_query($db_connection, "SELECT * FROM data");
-     echo var_dump($db_connection);
-  ?></p>
-    
+<?php
+$db = pg_connect("host=10.0.1.243 port=5432 dbname=postgres user=postgres password=1234");
+$query = "SELECT * FROM data";
+$result = pg_query($query); 
+echo $result;
+?>
+
 </body>
 </html>
