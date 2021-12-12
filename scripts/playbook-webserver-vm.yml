@@ -1,6 +1,6 @@
 ---
  - name: Configure the server, Download the files from Github
-   hosts: all
+   hosts: webserver
    become: true
    sudo: yes
    tasks:
