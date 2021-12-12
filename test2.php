@@ -18,6 +18,7 @@ if (!$conn) {
     echo "An error occurred.\n";
     exit;
    }
+ echo 'xui';
 ?>
 </p>
 
