@@ -2,7 +2,6 @@
 - name: Configure the server, Download the files from Github
   hosts: webserver
   become: true
-  sudo: yes
   tasks:
     - name: 0. Check the connection
       ping:
