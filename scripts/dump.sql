@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS data (
   name varchar(255),
-  number varchar(12) PRIMARY KEY
+  phone varchar(12) PRIMARY KEY
   );
     INSERT INTO data VALUES('Emilis', '+37011111111');
     INSERT INTO data VALUES('Julius', '+37011111114');
