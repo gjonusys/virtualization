@@ -6,18 +6,15 @@
     <title>XUI</title>
 </head>
 <body>
-
+<p>
 <?php
-$db = pg_connect("host=10.0.1.243 port=5432 dbname=postgres user=postgres password=1234");
 if($db != NULL) {
     echo 'Isejo';
 } else {
     echo 'Pizda';
 }
-$query = "SELECT * FROM data";
-$result = pg_query($query); 
-echo $result;
 ?>
+</p>
 
 </body>
 </html>
