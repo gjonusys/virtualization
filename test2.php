@@ -6,7 +6,9 @@
     <title>XUI</title>
 </head>
 <body>
-<p>
+<div style="width: 100%; height:500px; backrgound-color: #fbfff0; margin: 0 auto!important; display: flex; justify-content: center;">
+<div style="width: 50%;">Person</div>
+<div style="width: 50%;">Number</div>
 <?php
 
 $conn = pg_connect("host=10.0.1.243 port=5432 dbname=postgres user=postgres password=1234");
@@ -22,14 +24,11 @@ if (!$result) {
 }
 
 while ($row = pg_fetch_row($result)) {
-    echo "Žmogus: $row[0]  Numeris: $row[1]";
-    echo "<br />\n";
+    echo "<div>" . $row[0] . "</div>";
+    echo "<div>" . $row[1] . "</div>";
   }
-
-echo var_dump($result);
-echo 'LOX';
 ?> 
-</p>
+</div>
 
 </body>
 </html>
