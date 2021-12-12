@@ -2,7 +2,7 @@
  - name: Configure the server, Download the files from Github
    hosts: all
    become: true
-   #sudo: yes
+   sudo: yes
    tasks:
     - name: 0. Check the connection
       ping:
@@ -15,6 +15,9 @@
 
     - name: 2.2. Install PHP
       apt: name=libapache2-mod-php state=present
+    
+    - name: 2.3 Install PHP modules
+      apt: name=php-pgsql
 
     - name: 3. Remove all files and directories from /var/www/html
       file:
@@ -27,29 +30,18 @@
         - absent
         - directory
 
-    - name: 4. Add Github SSH private key
-      copy: >
-        src=/root/virtualization_id_rsa.github
-        dest=/root/.ssh/id_rsa.github
-        owner=root
-        group=root
-        mode=0600
-
-    - name: 5. Configure SSH to use Ansible key for Github
-      template: >
-        src=/root/ssh_config.j2
-        dest=/root/.ssh/config
-        owner=root
-        group=root
-        mode=0644
-
-    - name: 6. Install Git
+    - name: 4. Install Git
       apt: name=git state=latest
 
-    - name: 7. Clone a public repository
+    - name: 5. Clone a public repository
       git:
         repo=https://github.com/gjonusys/virtualization.git
-        key_file=/root/.ssh/id_rsa.github
         dest=/var/www/html
-#        clone: yes
-#        update: yes
+        clone: yes
+        update: yes
+
+    - name: 6. Copy vars.php to webserver
+      copy:
+        src: vars.php
+        dest: /var/www/html/
+    
