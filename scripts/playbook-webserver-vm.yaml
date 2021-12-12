@@ -41,5 +41,5 @@
 
     - name: 6. Copy vars.php to webserver
       copy:
-        src: vars.php
+        src: ~/vars.php
         dest: /var/www/html/

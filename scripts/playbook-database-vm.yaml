@@ -45,7 +45,7 @@
         state=present
     - name: Copy dump.sql file to remote server
       copy:
-        src: /virtualization/scripts/dump.sql
+        src: ~/virtualization/scripts/dump.sql
         dest: /var/lib/postgresql/dump.sql
     - name: Add test data to new database
       become: true
