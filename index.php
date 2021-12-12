@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html itemscope lang="lt" itemtype="http://schema.org/Blog">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -105,14 +104,6 @@
       }
     }
   </style>-->
-
-  <p>
-  <?php 
-     $db_connection = pg_connect("host=10.0.1.243 dbname=postgres user=postgres password=1234");
-     $result = pg_query($db_connection, "SELECT * FROM data");
-     echo var_dump($result);
-  ?>
-  </p>
     <div id="total_popup_overlay"></div>
     <div id="total_popup">
       <div id="total_popup_content"></div>
