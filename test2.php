@@ -8,11 +8,16 @@
 <body>
 <p>
 <?php
-if($db != NULL) {
-    echo 'Isejo';
-} else {
-    echo 'Pizda';
-}
+$conn = pg_connect("host=10.0.1.243 port=5432 dbname='postgres' user='postgres' password='1234'");
+if (!$conn) {
+    echo "An error occurred.\n";
+    exit;
+   }
+   $result = pg_query($conn, "SELECT * FROM data");
+   if (!$result) {
+    echo "An error occurred.\n";
+    exit;
+   }
 ?>
 </p>
 
