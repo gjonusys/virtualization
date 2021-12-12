@@ -6,8 +6,8 @@
     <title>XUI</title>
 </head>
 <body>
-<div style="width: 100%; height:500px; backrgound-color: #fbfff0; margin: 0 auto!important; display: flex; justify-content: center;">
-<div style="width: 50%;">Person</div>
+<div style="width: 100%; height:500px; background-color: #fbfff0; margin: 0 auto!important; display: grid; grid-template-columns: 1fr 1fr;">
+<div>Person</div>
 <div style="width: 50%;">Number</div>
 <?php
 
