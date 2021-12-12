@@ -21,6 +21,11 @@ if (!$result) {
   exit;
 }
 
+while ($row = pg_fetch_row($result)) {
+    echo "Žmogus: $row[0]  Numeris: $row[1]";
+    echo "<br />\n";
+  }
+
 echo var_dump($result);
 echo 'LOX';
 ?> 
