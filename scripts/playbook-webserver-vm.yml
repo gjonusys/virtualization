@@ -4,41 +4,52 @@
    become: true
    #sudo: yes
    tasks:
-   - name: 0. Check the connection
-	   ping:
-     
-	 - name: 1. Update Debian
-     apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+    - name: 0. Check the connection
+      ping:
 
-   - name: 2. Install Apache2
-		 apt: name=apache2 state=latest
+    - name: 1. Update Debian
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
 
-	 - name: 3. Delete static files from www
-		 file:
-		 path: /var/www/html/index.html
-		 state: absent
+    - name: 2.1. Install Apache2
+      apt: name=apache2 state=latest
 
-	 - name: 4. Add Github SSH private key
-		 copy: >
-		   src=/root/virtualization_id_rsa.github
-			 dest=/root/.ssh/id_rsa.github
-			 owner=root
-			 group=root
-			 mode=0600
+    - name: 2.2. Install PHP
+      apt: name=libapache2-mod-php state=present
 
-	 - name: 5. Configure SSH to use Ansible key for Github
-		 template: >
-			 src=/root/ssh_config.j2
-			 dest=/root/.ssh/config
-			 owner=root
-			 group=root
-			 mode=0644
+    - name: 3. Remove all files and directories from /var/www/html
+      file:
+        state: "{{ item }}"
+        path: "/var/www/html"
+        owner: root
+        group: root
+        mode: '0755'
+      with_items:
+        - absent
+        - directory
 
-	 - name: 6. Install Git
-		 apt: name=git state=latest
+    - name: 4. Add Github SSH private key
+      copy: >
+        src=/root/virtualization_id_rsa.github
+        dest=/root/.ssh/id_rsa.github
+        owner=root
+        group=root
+        mode=0600
 
-	 - name: 7. Clone a public repository
-		 git:
-		   repo=https://github.com/gjonusys/virtualization.git
-			 key_file=/root/.ssh/id_rsa.github
-			 dest=/var/www/html
+    - name: 5. Configure SSH to use Ansible key for Github
+      template: >
+        src=/root/ssh_config.j2
+        dest=/root/.ssh/config
+        owner=root
+        group=root
+        mode=0644
+
+    - name: 6. Install Git
+      apt: name=git state=latest
+
+    - name: 7. Clone a public repository
+      git:
+        repo=https://github.com/gjonusys/virtualization.git
+        key_file=/root/.ssh/id_rsa.github
+        dest=/var/www/html
+#        clone: yes
+#        update: yes
