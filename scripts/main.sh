@@ -125,7 +125,7 @@ echo "Done pinging!"
 
 echo '<?php $ip="' > vars.php
 echo $IPDB >> vars.php
-echo '";' >> vars.php
+echo '"; ?>' >> vars.php
 
 #Gathering newest data from web git
 
