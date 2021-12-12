@@ -1,17 +1,9 @@
 ---
-<<<<<<< HEAD
 - name: Configure the server, Download the files from Github
   hosts: webserver
   become: true
   sudo: yes
   tasks:
-=======
- - name: Configure the server, Download the files from Github
-   hosts: webserver
-   become: true
-   sudo: yes
-   tasks:
->>>>>>> 0cc649bd4a1e4f2c6250ee30e767671a4bc81f6f
     - name: 0. Check the connection
       ping:
 
