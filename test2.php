@@ -6,9 +6,9 @@
     <title>XUI</title>
 </head>
 <body>
-<div style="width: 100%; height:500px; background-color: #fbfff0; margin: 0 auto!important; display: grid; grid-template-columns: 1fr 1fr;">
-<div>Person</div>
-<div style="width: 50%;">Number</div>
+<div style="width: 60%; height:500px; background-color: #fbfff0; margin: 0 auto!important; display: grid; grid-template-columns: 1fr 1fr; font-family: Arial, Helvetica, sans-serif;">
+<div style="display:flex; justify-content: center; align-items:center">Person</div>
+<div style="display:flex; justify-content: center; align-items:center">Number</div>
 <?php
 
 $conn = pg_connect("host=10.0.1.243 port=5432 dbname=postgres user=postgres password=1234");
