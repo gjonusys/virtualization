@@ -269,21 +269,7 @@
                 <li class="li2">
                   <a
                     style="padding: 10px 10px 20px 10px"
-                    href="viber://chat?number=%2B75555555559"
-                    ><img
-                      src="img/viber.png"
-                      style="
-                        width: 40px;
-                        margin-bottom: -18px;
-                        padding: 2px 15px 2px 5px;
-                      "
-                    />Naudojant "Viber" programėlę</a
-                  >
-                </li>
-                <li class="li2">
-                  <a
-                    style="padding: 10px 10px 20px 10px"
-                    href="https://api.whatsapp.com/send?phone=37011111111"
+                    href="calls.php"
                     ><img
                       src="img/whatsapp.png"
                       style="
