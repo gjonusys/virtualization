@@ -1,16 +1,16 @@
 ---
- - name: Configure the client-vm
-   hosts: all
-   become: true
-   tasks:
-     - name: 0. Check the connection
-       ping:
+- name: Configure the client-vm
+  hosts: client
+  become: true
+  tasks:
+    - name: 0. Check the connection
+      ping:
 
-     - name: 1. Update Debian
-       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+    - name: 1. Update Debian
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
 
-     - name: 2. Install Firefox ESR
-       apt: name=firefox-esr state=latest
+    - name: 2. Install Firefox ESR
+      apt: name=firefox-esr state=latest
 
-     - name: 3. Open a website
-       shell: firefox-esr 193.219.91.103:9429 &
+    - name: 3. Open a website
+      shell: firefox-esr 193.219.91.103:9429 &

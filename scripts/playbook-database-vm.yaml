@@ -1,66 +1,66 @@
 ---
 - hosts: database
   become: yes
-  vars: 
+  vars:
     db_user: postgres
     db_name: postgres
     db_password: 1234
 
   tasks:
-  - name: Install required depenedancies
-    apt: name={{ item }} update_cache=true state=latest
-    with_items:
-    - bash
-    - openssl
-    - libssl-dev
-    - libssl-doc
-  - name: Install PostgreSQL
-    apt: name={{ item }} update_cache=true state=present
-    with_items:
-    - postgresql
-    - postgresql-contrib
-    - libpq-dev
-    - python3-psycopg2
-  - name: Ensure the PostgreSQL service is running
-    service: name=postgresql state=started enabled=yes
-  - name: Create the database with specified variables
-    become: true
-    become_user: postgres
-    postgresql_db: name={{ db_name }}
-      template='template0'
-      state=present
-  - name: Ensure user has access to the new DB
-    become: true
-    become_user: postgres
-    postgresql_user: db={{ db_name }}
-      name={{ db_user }}
-      password={{ db_password }}
-      priv=ALL
-      state=present
-  - name: Ensure that new user has no unnecessary permissions
-    become: true
-    become_user: postgres
-    postgresql_user: name={{ db_user }}
-      role_attr_flags=NOSUPERUSER,NOCREATEDB
-      state=present
-  - name: Copy dump.sql file to remote server
-    copy: 
-      src: dump.sql
-      dest: /var/lib/postgresql/dump.sql
-  - name: Add test data to new database
-    become: true
-    become_user: postgres
-    shell: psql {{ db_name }} < /var/lib/postgresql/dump.sql
-  - name: Allow remote connection to Database
-    postgresql_pg_hba:
-      dest: /etc/postgresql/13/main/pg_hba.conf
-      contype: host
-      users: all
-      databases: all
-      source: 0.0.0.0/0
-      method: md5
-  - name: Allow connections to database from outside of VU 
-    become_user: postgres
-    shell: echo "listen_addresses='*'" >> /etc/postgresql/13/main/postgresql.conf
-  - name: Restart postgreSQL service
-    shell: sudo service postgresql restart
+    - name: Install required depenedancies
+      apt: name={{ item }} update_cache=true state=latest
+      with_items:
+        - bash
+        - openssl
+        - libssl-dev
+        - libssl-doc
+    - name: Install PostgreSQL
+      apt: name={{ item }} update_cache=true state=present
+      with_items:
+        - postgresql
+        - postgresql-contrib
+        - libpq-dev
+        - python3-psycopg2
+    - name: Ensure the PostgreSQL service is running
+      service: name=postgresql state=started enabled=yes
+    - name: Create the database with specified variables
+      become: true
+      become_user: postgres
+      postgresql_db: name={{ db_name }}
+        template='template0'
+        state=present
+    - name: Ensure user has access to the new DB
+      become: true
+      become_user: postgres
+      postgresql_user: db={{ db_name }}
+        name={{ db_user }}
+        password={{ db_password }}
+        priv=ALL
+        state=present
+    - name: Ensure that new user has no unnecessary permissions
+      become: true
+      become_user: postgres
+      postgresql_user: name={{ db_user }}
+        role_attr_flags=NOSUPERUSER,NOCREATEDB
+        state=present
+    - name: Copy dump.sql file to remote server
+      copy:
+        src: dump.sql
+        dest: /var/lib/postgresql/dump.sql
+    - name: Add test data to new database
+      become: true
+      become_user: postgres
+      shell: psql {{ db_name }} < /var/lib/postgresql/dump.sql
+    - name: Allow remote connection to Database
+      postgresql_pg_hba:
+        dest: /etc/postgresql/13/main/pg_hba.conf
+        contype: host
+        users: all
+        databases: all
+        source: 0.0.0.0/0
+        method: md5
+    - name: Allow connections to database from outside of VU
+      become_user: postgres
+      shell: echo "listen_addresses='*'" >> /etc/postgresql/13/main/postgresql.conf
+    - name: Restart postgreSQL service
+      shell: sudo service postgresql restart

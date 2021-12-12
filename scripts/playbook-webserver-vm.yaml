@@ -1,9 +1,9 @@
 ---
- - name: Configure the server, Download the files from Github
-   hosts: all
-   become: true
-   sudo: yes
-   tasks:
+- name: Configure the server, Download the files from Github
+  hosts: webserver
+  become: true
+  sudo: yes
+  tasks:
     - name: 0. Check the connection
       ping:
 
@@ -15,7 +15,7 @@
 
     - name: 2.2. Install PHP
       apt: name=libapache2-mod-php state=present
-    
+
     - name: 2.3 Install PHP modules
       apt: name=php-pgsql
 
@@ -25,7 +25,7 @@
         path: "/var/www/html"
         owner: root
         group: root
-        mode: '0755'
+        mode: "0755"
       with_items:
         - absent
         - directory
@@ -35,8 +35,8 @@
 
     - name: 5. Clone a public repository
       git:
-        repo=https://github.com/gjonusys/virtualization.git
-        dest=/var/www/html
+        repo: https://github.com/gjonusys/virtualization.git
+        dest: /var/www/html
         clone: yes
         update: yes
 
@@ -44,4 +44,3 @@
       copy:
         src: vars.php
         dest: /var/www/html/
-    
