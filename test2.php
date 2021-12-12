@@ -24,8 +24,14 @@ if (!$result) {
 }
 
 while ($row = pg_fetch_row($result)) {
-    echo "<div>" . $row[0] . "</div>";
-    echo "<div>" . $row[1] . "</div>";
+    $div1 = '<div style="display:flex; justify-content: center; align-items:center">' . $row[0] . '</div>';
+
+    $div2 = '<div style="display:flex; justify-content: center; align-items:center">';
+    $div2 .= '<a href="https://api.whatsapp.com/send?phone='. $row[1] .'">'. $row[1] .'</a></div>';
+    
+
+    echo $div1;
+    echo $div2;
   }
 ?> 
 </div>
